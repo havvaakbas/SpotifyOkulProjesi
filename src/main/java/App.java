@@ -35,15 +35,18 @@ public class App {
                     albumListele();
                     break;
                 case 6:
-                    playlistOlusturma();
+                    albumAratma();
                     break;
                 case 7:
-                    playlistListele();
+                    playlistOlusturma();
                     break;
                 case 8:
-                    playlisteSarkiEkle();
+                    playlistListele();
                     break;
                 case 9:
+                    playlisteSarkiEkle();
+                    break;
+                case 10:
                     System.out.println("Program sonlaniyor.");
                     menu.close();
                     System.exit(0);
@@ -60,10 +63,11 @@ public class App {
         System.out.println("3-Sarki Listele");
         System.out.println("4-Sarkici Listele");
         System.out.println("5-Album Listele");
-        System.out.println("6-Playlist Olustur");
-        System.out.println("7-Playlist Listele");
-        System.out.println("8-Playliste Sarki Ekle");
-        System.out.println("9-Programdan Cik");
+        System.out.println("6-Album Aratma");
+        System.out.println("7-Playlist Olustur");
+        System.out.println("8-Playlist Listele");
+        System.out.println("9-Playliste Sarki Ekle");
+        System.out.println("10-Programdan Cik");
 
     }
     //kullanıcı ekleyen fonksiyon
@@ -82,6 +86,7 @@ public class App {
         userListesi.add(mevcutKullanici);
     }
 
+    // Kayitli kullanici icin giris yaptiranfonksiyon
     public static void girisYapma(){
         scan = new Scanner(System.in);
         System.out.println("Kullanici Adinizi Giriniz: ");
@@ -119,6 +124,32 @@ public class App {
             System.out.println(i.name);
         }
     }
+
+    //album aratan fonksiyon
+    public static void albumAratma(){
+        scan = new Scanner(System.in);
+        System.out.println("Arayacaginiz albumu giriniz: ");
+        String albumAdi = scan.nextLine();
+        Album bulunanAlbum = new Album();
+        boolean albumAratma = false;
+        for(Album i: albumListesi ){
+            if(i.name.toLowerCase().equals(albumAdi.toLowerCase())) {
+                albumAratma = true;
+                bulunanAlbum = i;
+            }
+        }
+        if(albumAratma == false){
+            System.out.println("Aradiginiz album bulunamadi. Tekrar deneyiniz");
+        }
+        else{
+            System.out.println("Album bulundu, listeleniyor");
+            for(Song i: bulunanAlbum.songList ){
+                System.out.println(i.name);
+            }
+            albumAratma = false;
+        }
+    }
+
     //şarkı listeyleyen fonksiyon
     public static void sarkiListele(){
         for(Song i: songListesi ){
@@ -229,6 +260,4 @@ public class App {
         testUser.password = "123456";
         userListesi.add(testUser);
     }
-
-
 }
